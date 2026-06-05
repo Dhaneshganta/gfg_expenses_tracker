@@ -37,7 +37,6 @@
                 {{transaction.description}} <span> {{transaction.amount}} </span>
                 <a class="delete-btn" href="{% url 'delete_transaction' transaction.id %}">
                     <i class="fas fa-trash-alt"></i></a>
-             
             </li>
 
             {% endfor %}
@@ -181,5 +180,22 @@
     form.addEventListener("submit", addTransaction);
 
 </script> -->
+
+
+
+{% if messages %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        {% for message in messages %}
+        // Use the escapejs filter to keep strings safe from syntax breakage
+        let msgText = "{{ message|escapejs }}";
+        let msgTag = "{{ message.tags|escapejs }}";
+
+        // Example: trigger a generic alert
+        alert(`${msgTag}: ${msgText}`);
+        {% endfor %}
+    });
+</script>
+{% endif %}
 
 </html>

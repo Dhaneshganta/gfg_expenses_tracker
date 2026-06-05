@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from expenses.models import TrackingHistory,CurrentBalance
 # Create your views here.
+from django.contrib import messages
 
 def index(request):
     if request.method == 'POST':
@@ -12,6 +13,11 @@ def index(request):
         expense_type = 'CREDIT'
         if int(amount) < 0:
             expense_type = 'DEBIT'
+
+        if int(amount) == 0 :
+            messages.success(request, "Amount can 't be zero.")
+            return redirect('/')
+
         trackingHistory = TrackingHistory.objects.create(
             amount = amount,
             description = description,
