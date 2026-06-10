@@ -17,3 +17,12 @@ class TrackingHistory(models.Model):
     def __str__(self) -> str:
         return f"this is the curent amount{self.expense_type}"
 
+class RequestLogs(models.Model):
+    request_info = models.TextField()
+    request_type = models.CharField(max_length=100)
+    request_method = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now=True)
+    
+
+
+    
